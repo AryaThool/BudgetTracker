@@ -257,7 +257,7 @@ export function Transactions() {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Net Balance</p>
               <p className={`text-2xl font-bold ${totalIncome - totalExpenses >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
-                ₹{Math.abs(totalIncome - totalExpenses).toLocaleString('en-IN')}
+                ${Math.abs(totalIncome - totalExpenses).toLocaleString()}
               </p>
             </div>
           </div>
@@ -332,7 +332,7 @@ export function Transactions() {
         {(searchTerm || filterType !== 'all' || filterCategory !== 'all' || dateRange.start || dateRange.end) && (
           <div className="mt-4 flex items-center justify-between">
             <p className="text-sm text-gray-600">
-              ₹{Math.abs(totalIncome - totalExpenses).toLocaleString('en-IN')}
+              Showing {filteredTransactions.length} of {transactions.length} transactions
             </p>
             <button
               onClick={() => {
