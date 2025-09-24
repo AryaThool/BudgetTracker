@@ -424,11 +424,11 @@ function GroupCard({ group, currentUserId }: { group: Group; currentUserId: stri
       <div className="space-y-3">
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Total Expenses</span>
-          <span className="font-medium">${totalExpenses.toLocaleString()}</span>
+          <span className="font-medium">₹{totalExpenses.toLocaleString('en-IN')}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Per Person</span>
-          <span className="font-medium">${perPersonShare.toLocaleString()}</span>
+          <span className="font-medium">₹{perPersonShare.toLocaleString('en-IN')}</span>
         </div>
         <div className="flex justify-between text-sm">
           <span className="text-gray-600">Members</span>
@@ -442,7 +442,7 @@ function GroupCard({ group, currentUserId }: { group: Group; currentUserId: stri
               {transactions.slice(0, 3).map(transaction => (
                 <div key={transaction.id} className="flex justify-between text-xs">
                   <span className="text-gray-600">{transaction.category}</span>
-                  <span className="font-medium">${Number(transaction.amount).toLocaleString()}</span>
+                  <span className="font-medium">₹{Number(transaction.amount).toLocaleString('en-IN')}</span>
                 </div>
               ))}
             </div>

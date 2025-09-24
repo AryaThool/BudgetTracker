@@ -197,7 +197,7 @@ export function Reports() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Income</p>
-              <p className="text-2xl font-bold text-green-600">${totalIncome.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-green-600">₹{totalIncome.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
@@ -209,7 +209,7 @@ export function Reports() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Expenses</p>
-              <p className="text-2xl font-bold text-red-600">${totalExpenses.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-red-600">₹{totalExpenses.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
@@ -222,7 +222,7 @@ export function Reports() {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Net Savings</p>
               <p className={`text-2xl font-bold ${totalIncome - totalExpenses >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
-                ${Math.abs(totalIncome - totalExpenses).toLocaleString()}
+                ₹{Math.abs(totalIncome - totalExpenses).toLocaleString('en-IN')}
               </p>
             </div>
           </div>
@@ -251,7 +251,7 @@ export function Reports() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
-              <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, '']} />
+              <Tooltip formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, '']} />
               <Legend />
               <Line 
                 type="monotone" 
@@ -297,7 +297,7 @@ export function Reports() {
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, '']} />
+              <Tooltip formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, '']} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -310,7 +310,7 @@ export function Reports() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis type="number" />
               <YAxis dataKey="name" type="category" width={80} />
-              <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, '']} />
+              <Tooltip formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, '']} />
               <Bar dataKey="amount" fill={(entry) => entry.color} />
             </BarChart>
           </ResponsiveContainer>
@@ -329,7 +329,7 @@ export function Reports() {
               <YAxis />
               <Tooltip 
                 labelFormatter={(date) => new Date(date).toLocaleDateString()}
-                formatter={(value: number) => [`$${value.toLocaleString()}`, 'Spent']}
+                formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, 'Spent']}
               />
               <Line 
                 type="monotone" 
@@ -385,7 +385,7 @@ export function Reports() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      ${category.value.toLocaleString()}
+                      ₹{category.value.toLocaleString('en-IN')}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {percentage.toFixed(1)}%

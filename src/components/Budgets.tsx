@@ -252,7 +252,7 @@ export function Budgets() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Budget</p>
-              <p className="text-2xl font-bold text-gray-900">${totalBudget.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">₹{totalBudget.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
@@ -264,7 +264,7 @@ export function Budgets() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Spent</p>
-              <p className="text-2xl font-bold text-orange-600">${totalSpent.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-orange-600">₹{totalSpent.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@ export function Budgets() {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Remaining</p>
               <p className={`text-2xl font-bold ${totalRemaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                ${Math.abs(totalRemaining).toLocaleString()}
+                ₹{Math.abs(totalRemaining).toLocaleString('en-IN')}
               </p>
             </div>
           </div>
@@ -306,8 +306,8 @@ export function Budgets() {
           <div className="mt-2 space-y-1">
             {overBudgetCategories.map(budget => (
               <p key={budget.id} className="text-sm text-red-700">
-                <span className="font-medium">{budget.category}</span> is over budget by $
-                {Math.abs(budget.remaining).toLocaleString()}
+                <span className="font-medium">{budget.category}</span> is over budget by ₹
+                {Math.abs(budget.remaining).toLocaleString('en-IN')}
               </p>
             ))}
           </div>
@@ -339,16 +339,16 @@ export function Budgets() {
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Spent</span>
-                <span className="font-medium">${budget.spent.toLocaleString()}</span>
+                <span className="font-medium">₹{budget.spent.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Budget</span>
-                <span className="font-medium">${Number(budget.amount).toLocaleString()}</span>
+                <span className="font-medium">₹{Number(budget.amount).toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Remaining</span>
                 <span className={`font-medium ${budget.remaining >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                  ${Math.abs(budget.remaining).toLocaleString()}
+                  ₹{Math.abs(budget.remaining).toLocaleString('en-IN')}
                 </span>
               </div>
 
