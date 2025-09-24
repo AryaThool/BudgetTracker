@@ -160,7 +160,7 @@ export function Dashboard() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Income</p>
-              <p className="text-2xl font-bold text-gray-900">${totalIncome.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">₹{totalIncome.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@ export function Dashboard() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Expenses</p>
-              <p className="text-2xl font-bold text-gray-900">${totalExpenses.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-gray-900">₹{totalExpenses.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
@@ -185,7 +185,7 @@ export function Dashboard() {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Net Savings</p>
               <p className={`text-2xl font-bold ${netSavings >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
-                ${Math.abs(netSavings).toLocaleString()}
+                ₹{Math.abs(netSavings).toLocaleString('en-IN')}
               </p>
             </div>
           </div>
@@ -234,7 +234,7 @@ export function Dashboard() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
-              <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, '']} />
+              <Tooltip formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, '']} />
               <Line 
                 type="monotone" 
                 dataKey="income" 
@@ -272,7 +272,7 @@ export function Dashboard() {
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, '']} />
+              <Tooltip formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, '']} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -285,7 +285,7 @@ export function Dashboard() {
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
-              <Tooltip formatter={(value: number) => [`$${value.toLocaleString()}`, '']} />
+              <Tooltip formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, '']} />
               <Bar dataKey="income" fill="#10B981" name="Income" />
               <Bar dataKey="expenses" fill="#EF4444" name="Expenses" />
             </BarChart>
@@ -302,7 +302,7 @@ export function Dashboard() {
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-sm font-medium text-gray-700">{category.category}</span>
                     <span className="text-sm text-gray-500">
-                      ${category.amount.toLocaleString()} / ${category.budget.toLocaleString()}
+                      ₹{category.amount.toLocaleString('en-IN')} / ₹{category.budget.toLocaleString('en-IN')}
                     </span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -363,7 +363,7 @@ export function Dashboard() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <span className={transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}>
-                      {transaction.type === 'income' ? '+' : '-'}${Number(transaction.amount).toLocaleString()}
+                      {transaction.type === 'income' ? '+' : '-'}₹{Number(transaction.amount).toLocaleString('en-IN')}
                     </span>
                   </td>
                 </tr>

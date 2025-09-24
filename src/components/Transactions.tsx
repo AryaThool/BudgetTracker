@@ -259,7 +259,7 @@ export function Transactions() {
               <p className={`text-2xl font-bold ${totalIncome - totalExpenses >= 0 ? 'text-blue-600' : 'text-orange-600'}`}>
                 ${Math.abs(totalIncome - totalExpenses).toLocaleString()}
               </p>
-            </div>
+            <p className="text-2xl font-bold text-red-600">₹{totalExpenses.toLocaleString('en-IN')}</p>
           </div>
         </div>
       </div>
@@ -332,7 +332,7 @@ export function Transactions() {
         {(searchTerm || filterType !== 'all' || filterCategory !== 'all' || dateRange.start || dateRange.end) && (
           <div className="mt-4 flex items-center justify-between">
             <p className="text-sm text-gray-600">
-              Showing {filteredTransactions.length} of {transactions.length} transactions
+              ₹{Math.abs(totalIncome - totalExpenses).toLocaleString('en-IN')}
             </p>
             <button
               onClick={() => {
@@ -400,7 +400,7 @@ export function Transactions() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <span className={transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}>
-                      {transaction.type === 'income' ? '+' : '-'}${Number(transaction.amount).toLocaleString()}
+                      {transaction.type === 'income' ? '+' : '-'}₹{Number(transaction.amount).toLocaleString('en-IN')}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
