@@ -232,7 +232,7 @@ export function Transactions() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Income</p>
-              <p className="text-2xl font-bold text-green-600">${totalIncome.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-green-600">₹{totalIncome.toLocaleString()}</p>
             </div>
           </div>
         </div>
@@ -244,7 +244,7 @@ export function Transactions() {
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Expenses</p>
-              <p className="text-2xl font-bold text-red-600">${totalExpenses.toLocaleString()}</p>
+              <p className="text-2xl font-bold text-red-600">₹{totalExpenses.toLocaleString()}</p>
             </div>
           </div>
         </div>
