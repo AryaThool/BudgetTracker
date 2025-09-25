@@ -12,6 +12,8 @@ BudgetTracker is a simple and efficient application designed to help you manage 
   - Typescript
   - Supabase
 
+## Workflow Diagram
+![BudgetTracker](https://ezjhlsfatgqxqhhizltm.supabase.co/storage/v1/object/public/Arya%20Thool/diagram-export-9-25-2025-6_31_53-PM.png)
 
 ## Features
 
