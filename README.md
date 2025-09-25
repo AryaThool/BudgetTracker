@@ -2,6 +2,8 @@
 
 BudgetTracker is a simple and efficient application designed to help you manage your expenses, income, and savings. With intuitive features for transaction tracking and insightful analytics, this project aims to help you achieve better financial management.
 
+## Live Link
+[BudgetTracker](https://budgettracker.aryathool.in/)
 ## Tech Stack
 
 - **Frontend:**  
