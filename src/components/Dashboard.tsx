@@ -31,6 +31,7 @@ export function Dashboard() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [loading, setLoading] = useState(true);
+  const [animateCards, setAnimateCards] = useState(false);
 
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear();
@@ -38,6 +39,10 @@ export function Dashboard() {
   useEffect(() => {
     if (user) {
       loadData();
+      // Trigger card animations after a short delay
+      setTimeout(() => {
+        setAnimateCards(true);
+      }, 100);
     }
   }, [user]);
 
@@ -143,7 +148,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
         <div className="text-sm text-gray-500">
@@ -153,33 +158,33 @@ export function Dashboard() {
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className={`bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover ${animateCards ? 'animate-bounce-in' : ''}`}>
           <div className="flex items-center">
-            <div className="p-2 bg-green-100 rounded-lg">
+            <div className="p-3 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl shadow-lg">
               <TrendingUp className="h-6 w-6 text-green-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Income</p>
-              <p className="text-2xl font-bold text-gray-900">₹{totalIncome.toLocaleString('en-IN')}</p>
+              <p className="text-2xl font-bold text-green-600">₹{totalIncome.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className={`bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover ${animateCards ? 'animate-bounce-in' : ''}`} style={{ animationDelay: '0.1s' }}>
           <div className="flex items-center">
-            <div className="p-2 bg-red-100 rounded-lg">
+            <div className="p-3 bg-gradient-to-br from-red-400 to-pink-500 rounded-xl shadow-lg">
               <TrendingDown className="h-6 w-6 text-red-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Total Expenses</p>
-              <p className="text-2xl font-bold text-gray-900">₹{totalExpenses.toLocaleString('en-IN')}</p>
+              <p className="text-2xl font-bold text-red-600">₹{totalExpenses.toLocaleString('en-IN')}</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className={`bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover ${animateCards ? 'animate-bounce-in' : ''}`} style={{ animationDelay: '0.2s' }}>
           <div className="flex items-center">
-            <div className={`p-2 rounded-lg ${netSavings >= 0 ? 'bg-blue-100' : 'bg-orange-100'}`}>
+            <div className={`p-3 rounded-xl shadow-lg ${netSavings >= 0 ? 'bg-gradient-to-br from-blue-400 to-indigo-500' : 'bg-gradient-to-br from-orange-400 to-red-500'}`}>
               <PiggyBank className={`h-6 w-6 ${netSavings >= 0 ? 'text-blue-600' : 'text-orange-600'}`} />
             </div>
             <div className="ml-4">
@@ -191,14 +196,14 @@ export function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className={`bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover ${animateCards ? 'animate-bounce-in' : ''}`} style={{ animationDelay: '0.3s' }}>
           <div className="flex items-center">
-            <div className="p-2 bg-purple-100 rounded-lg">
+            <div className="p-3 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-xl shadow-lg">
               <DollarSign className="h-6 w-6 text-purple-600" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Transactions</p>
-              <p className="text-2xl font-bold text-gray-900">{currentMonthTransactions.length}</p>
+              <p className="text-2xl font-bold text-purple-600">{currentMonthTransactions.length}</p>
             </div>
           </div>
         </div>
@@ -206,7 +211,7 @@ export function Dashboard() {
 
       {/* Budget Alerts */}
       {categoryData.some(c => c.budget > 0 && c.amount > c.budget) && (
-        <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+        <div className="bg-gradient-to-r from-orange-50 to-red-50 border border-orange-200 rounded-xl p-6 shadow-lg animate-slide-up">
           <div className="flex items-center">
             <AlertCircle className="h-5 w-5 text-orange-600 mr-2" />
             <h3 className="text-sm font-medium text-orange-800">Budget Alerts</h3>
@@ -225,11 +230,11 @@ export function Dashboard() {
       )}
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
         {/* Monthly Trends */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Monthly Trends</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={320}>
             <LineChart data={monthlyTrends}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
@@ -254,9 +259,9 @@ export function Dashboard() {
         </div>
 
         {/* Category Breakdown */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Spending by Category</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={320}>
             <PieChart>
               <Pie
                 data={pieData}
@@ -278,9 +283,9 @@ export function Dashboard() {
         </div>
 
         {/* Income vs Expenses */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Income vs Expenses</h3>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={320}>
             <BarChart data={monthlyTrends}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
@@ -293,7 +298,7 @@ export function Dashboard() {
         </div>
 
         {/* Budget Progress */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200 card-hover">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Budget Progress</h3>
           <div className="space-y-4">
             {categoryData.length > 0 ? (
@@ -305,9 +310,9 @@ export function Dashboard() {
                       ₹{category.amount.toLocaleString('en-IN')} / ₹{category.budget.toLocaleString('en-IN')}
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
                     <div
-                      className={`h-2 rounded-full ${
+                      className={`h-3 rounded-full transition-all duration-1000 ease-out ${
                         category.amount > category.budget ? 'bg-red-500' : 'bg-blue-500'
                       }`}
                       style={{
@@ -325,24 +330,24 @@ export function Dashboard() {
       </div>
 
       {/* Recent Transactions */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+      <div className="bg-white rounded-xl shadow-lg border border-gray-200 card-hover">
         <div className="px-6 py-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto scrollbar-thin">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Description
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="hidden sm:table-cell px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Category
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Amount
                 </th>
               </tr>
@@ -350,18 +355,19 @@ export function Dashboard() {
             <tbody className="bg-white divide-y divide-gray-200">
               {transactions.slice(0, 5).map((transaction) => (
                 <tr key={transaction.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {new Date(transaction.date).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {transaction.notes || 'No description'}
+                  <td className="px-4 sm:px-6 py-4 text-sm text-gray-900">
+                    <div className="truncate max-w-xs">{transaction.notes || 'No description'}</div>
+                    <div className="sm:hidden text-xs text-gray-500 mt-1">{transaction.category}</div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="hidden sm:table-cell px-4 sm:px-6 py-4 whitespace-nowrap">
                     <span className="inline-flex px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
                       {transaction.category}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <td className="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <span className={transaction.type === 'income' ? 'text-green-600' : 'text-red-600'}>
                       {transaction.type === 'income' ? '+' : '-'}₹{Number(transaction.amount).toLocaleString('en-IN')}
                     </span>
@@ -371,7 +377,7 @@ export function Dashboard() {
             </tbody>
           </table>
           {transactions.length === 0 && (
-            <div className="text-center py-8">
+            <div className="text-center py-12">
               <p className="text-gray-500">No transactions yet. Start by adding your first transaction!</p>
             </div>
           )}
@@ -379,4 +385,3 @@ export function Dashboard() {
       </div>
     </div>
   );
-}
